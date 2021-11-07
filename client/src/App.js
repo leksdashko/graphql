@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react';
+import { useQuery } from '@apollo/client';
 import './App.css';
+import { GET_ALL_USERS } from './query/user';
 
 function App() {
+  const {data, loading, error} = useQuery(GET_ALL_USERS)
+  const [users, setUsers] = useState([]);
+
+  console.log(data);
+
+   useEffect(() => {
+
+   }, [data])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <form>
+        <input type="text"/>
+        <input type="number"/>
+        <div className="btns">
+          <button>Create</button>
+          <button>Get</button>
+        </div>
+      </form>
+
+      <div>
+        {
+          users.map(user => <div className="user">{user.id} {user.username} {user.age}</div>)
+        }
+      </div>
     </div>
   );
 }
