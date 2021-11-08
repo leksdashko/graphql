@@ -7,11 +7,15 @@ function App() {
   const {data, loading, error} = useQuery(GET_ALL_USERS)
   const [users, setUsers] = useState([]);
 
-  console.log(data);
+  useEffect(() => {
+    if(!loading){
+      setUsers(data.getAllUsers)
+    }
+  }, [data])
 
-   useEffect(() => {
-
-   }, [data])
+  if(loading){
+    return <h1>Loading...</h1>
+  }
 
   return (
     <div>
